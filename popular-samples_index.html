@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <a href="music_app_index.html">
+        <img
+          class="transparent-image"
+          src="logo_4.jpg"
+          alt="The sampler logo"
+        />
+      </a>
+      <div class="search container">
+        <input type="text" id="songSearch" placeholder="Search for a song..." />
+        <button id="searchButton" onclick="searchSong()">Search</button>
+      </div>
+      <nav>
+        <ul>
+          <a href="popular-samples_index.html"
+            ><button>Popular Samples</button></a
+          >
+          <a href="genres_index.html"><button>Genres</button></a>
+          <a href="playlists_index.html"><button>Playlists</button></a>
+        </ul>
+      </nav>
+      <button type="button" onclick="showForm()">Create Account</button>
+    </header>
+    <main>
+      <form id="userForm" class="popup-form">
+        <label for="userName">Enter your name:</label>
+        <input type="text" id="userName" autocomplete="name" />
+        <label for="favoriteArtists"
+          >Enter your favorite artists (comma-separated):</label
+        >
+        <textarea id="favoriteArtists" rows="4"></textarea>
+        <button type="button" onclick="processForm()">Submit</button>
+      </form>
+
+      <h1>Popular Samples</h1>
+      <h2>Herb Alpert, “Rise” / The Notorious B.I.G., “Hypnotize”</h2>
+      <iframe
+        src="herb_alpert.mp4"
+        title="Herb Alpert “Rise” Notorious B.I.G “Hypnotize” The Sample Suite Show"
+      ></iframe>
+      <h2>Nina Simone, “Strange Fruit” / Kanye West, “Blood on the Leaves”</h2>
+      <iframe
+        src="blood_on_the_leaves.mp4"
+        title="Nina Simone: Hip Hops Secret Weapon"
+      ></iframe>
+      <h2>Ray Charles, “I Got a Woman” / Kanye West, “Gold Digger”</h2>
+      <iframe
+        src="gold_digger.mp4"
+        title="Gold Digger by Kanye West but the intro is extended perfectly"
+      ></iframe>
+      <h2>
+        Janet Jackson, “Any Time, Any Place” / Kendrick Lamar, “Poetic Justice”
+      </h2>
+      <iframe
+        src="poetic_justice.mp4"
+        title="Sample Breakdown: Kendrick Lamar - Poetic Justice ft. Drake"
+      ></iframe>
+      <h2>
+        Ms. Lauryn Hill, “Mystery of Iniquity” / Kanye West, “All Falls Down”
+      </h2>
+      <iframe
+        src="all_falls_down.mp4"
+        title="All Falls Down - Kanye West (Original Sample Intro) ( Mystery of Iniquity - Lauryn Hill )"
+      ></iframe>
+      <h2>
+        Grant Green, "Maybe Tomorrow / Kendrick Lamar, "Sing About Me, I'm Dying
+        of Thirst"
+      </h2>
+      <iframe
+        src="sing_about_me.mp4"
+        title="Sample Breakdown- Kendrick Lamar - Sing About Me, I’m Dying of Thirst"
+      ></iframe>
+      <div id="userOutput" style="display: none">
+        <h3>User Input:</h3>
+        <p id="userNameOutput"></p>
+        <p id="userNameOutput"></p>
+        <p id="favoriteArtistsOutput"></p>
+      </div>
+    </main>
+    <footer></footer>
+
+    <script>
+      console.log("Page Loaded");
+
+      const userForm = document.querySelector("#userForm");
+      const userNameInput = document.querySelector("#userName");
+      const favoriteArtistsInput = document.querySelector("#favoriteArtists");
+      const userOutput = document.querySelector("#userOutput");
+      const userNameOutput = document.querySelector("#userNameOutput");
+      const favoriteArtistsOutput = document.querySelector(
+        "#favoriteArtistsOutput"
+      );
+
+      userForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        const userName = userNameInput.value;
+        const favoriteArtists = favoriteArtistsInput.value;
+
+        userNameOutput.textContent = `Name: ${userName}`;
+        favoriteArtistsOutput.textContent = `Favorite Artists: ${favoriteArtists}`;
+
+        userOutput.style.display = "block";
+        userForm.style.display = "none";
+      });
+
+      function showForm() {
+        userForm.style.display = "flex";
+        userOutput.style.display = "none";
+        userForm.style.position = "fixed";
+      }
+
+      function processForm() {
+        const userName = userNameInput.value;
+        const favoriteArtists = favoriteArtistsInput.value;
+
+        userNameOutput.textContent = `Name: ${userName}`;
+        favoriteArtistsOutput.textContent = `Favorite Artists: ${favoriteArtists}`;
+
+        userOutput.style.display = "block";
+        userForm.style.display = "none";
+      }
+
+      function searchSong() {}
+    </script>
+  </body>
+</html>

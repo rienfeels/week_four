@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <a href="music_app_index.html">
+        <img
+          class="transparent-image"
+          src="logo_4.jpg"
+          alt="The sampler logo"
+        />
+      </a>
+      <div class="search container">
+        <input type="text" id="songSearch" placeholder="Search for a song..." />
+        <button id="searchButton" onclick="searchSong()">Search</button>
+      </div>
+      <nav>
+        <ul>
+          <a href="popular-samples_index.html"
+            ><button>Popular Samples</button></a
+          >
+          <a href="genres_index.html"><button>Genres</button></a>
+          <a href="playlists_index.html"><button>Playlists</button></a>
+        </ul>
+      </nav>
+      <button type="button" onclick="showForm()">Create Account</button>
+    </header>
+    <main>
+      <form id="userForm" class="popup-form">
+        <label for="userName">Enter your name:</label>
+        <input type="text" id="userName" autocomplete="name" />
+
+        <label for="favoriteArtists"
+          >Enter your favorite artists (comma-separated):</label
+        >
+        <textarea id="favoriteArtists" rows="4"></textarea>
+
+        <button type="button" onclick="processForm()">Submit</button>
+      </form>
+
+      <div id="userOutput" style="display: none">
+        <h3>User Input:</h3>
+        <p id="userNameOutput"></p>
+        <p id="favoriteArtistsOutput"></p>
+      </div>
+      <div id="artistVotes">
+        <h3>Artist Votes:</h3>
+        <ul id="artistList"></ul>
+      </div>
+    </main>
+    <script>
+      console.log("Page Loaded");
+
+      const userForm = document.querySelector("#userForm");
+      const userNameInput = document.querySelector("#userName");
+      const favoriteArtistsInput = document.querySelector("#favoriteArtists");
+      const userOutput = document.querySelector("#userOutput");
+      const userNameOutput = document.querySelector("#userNameOutput");
+      const favoriteArtistsOutput = document.querySelector(
+        "#favoriteArtistsOutput"
+      );
+      const artistList = document.querySelector("#artistList");
+
+      // Object to store votes for each artist
+      const artistVotes = {};
+
+      userForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const userName = userNameInput.value;
+        const favoriteArtists = favoriteArtistsInput.value;
+
+        userNameOutput.textContent = `Name: ${userName}`;
+        favoriteArtistsOutput.textContent = `Favorite Artists: ${favoriteArtists}`;
+
+        userOutput.style.display = "block";
+        userForm.style.display = "none";
+
+        displayFavoriteArtists(favoriteArtists);
+      });
+
+      function showForm() {
+        userForm.style.display = "flex";
+        userOutput.style.display = "none";
+        userForm.style.position = "fixed";
+      }
+
+      function processForm() {
+        const userName = userNameInput.value;
+        const favoriteArtists = favoriteArtistsInput.value;
+
+        userNameOutput.textContent = `Name: ${userName}`;
+        favoriteArtistsOutput.textContent = `Favorite Artists: ${favoriteArtists}`;
+
+        userOutput.style.display = "block";
+        userForm.style.display = "none";
+
+        displayFavoriteArtists(favoriteArtists);
+      }
+
+      function displayFavoriteArtists(artists) {
+        const artistArray = artists.split(",").map((artist) => artist.trim());
+
+        // Clear previous list
+        artistList.innerHTML = "";
+
+        artistArray.forEach((artist) => {
+          const listItem = document.createElement("li");
+          listItem.textContent = `${artist} `;
+
+          const upvoteButton = document.createElement("button");
+          upvoteButton.textContent = "Upvote";
+          upvoteButton.addEventListener("click", () => upvoteArtist(artist));
+
+          const downvoteButton = document.createElement("button");
+          downvoteButton.textContent = "Downvote";
+          downvoteButton.addEventListener("click", () =>
+            downvoteArtist(artist)
+          );
+
+          // Display the current votes for the artist
+          const voteCount = artistVotes[artist] || 0;
+          const voteCountDisplay = document.createElement("span");
+          voteCountDisplay.textContent = `Votes: ${voteCount}`;
+
+          listItem.appendChild(upvoteButton);
+          listItem.appendChild(downvoteButton);
+          listItem.appendChild(voteCountDisplay);
+
+          artistList.appendChild(listItem);
+        });
+      }
+
+      function upvoteArtist(artist) {
+        // Increment the vote count for the artist
+        artistVotes[artist] = (artistVotes[artist] || 0) + 1;
+
+        // Update the displayed votes
+        displayFavoriteArtists(favoriteArtistsInput.value);
+      }
+
+      function downvoteArtist(artist) {
+        // Decrement the vote count for the artist (with a minimum of 0)
+        artistVotes[artist] = Math.max((artistVotes[artist] || 0) - 1, 0);
+
+        // Update the displayed votes
+        displayFavoriteArtists(favoriteArtistsInput.value);
+      }
+    </script>
+  </body>
+</html>

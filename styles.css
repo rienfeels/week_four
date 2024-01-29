@@ -1,0 +1,198 @@
+body {
+  background-image: url("background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+img {
+  height: auto;
+  width: 15%;
+}
+
+.transparent-image {
+  opacity: 0.8;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+nav li {
+  margin-right: 15px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h1,
+h2 {
+  display: flex;
+  justify-content: center;
+  color: white;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  opacity: 0.7;
+}
+
+#songSearch {
+  padding: 5px;
+  margin-right: 5px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+footer {
+  margin-top: auto;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  color: white;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+#songSearch::placeholder {
+  color: #333; /* Set the color of the placeholder text */
+}
+
+#searchButton {
+  padding: 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  color: aquamarine;
+}
+
+div img,
+#mp4 {
+  width: 15%;
+  margin: 10px;
+}
+
+.video {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  color: aquamarine;
+}
+
+#userOutput {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  color: aquamarine;
+  width: 100%;
+}
+
+#userForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#userForm label,
+#userName,
+#userForm button {
+  margin: 5px;
+}
+
+#userForm button {
+  align-self: flex-start;
+}
+
+#userForm {
+  display: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: color-mix(in hsl shorter hue, blue 50%, cyan -50%);
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+# @media only screen and (max-width: 580px) {
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  h1,
+  h2 {
+    text-align: center;
+  }
+
+  .search-container {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  #songSearch {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  nav li {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .video {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #mp4 {
+    width: 100%;
+    height: auto;
+  }
+}
+
+iframe {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%; /* Make sure the iframe is responsive */
+}

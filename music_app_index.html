@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <a href="music_app_index.html">
+        <img
+          class="transparent-image"
+          src="logo_4.jpg"
+          alt="The sampler logo"
+        />
+      </a>
+      <div class="search container">
+        <input type="text" id="songSearch" placeholder="Search for a song..." />
+        <button id="searchButton" onclick="searchSong()">Search</button>
+      </div>
+      <nav>
+        <ul>
+          <a href="popular-samples_index.html"
+            ><button>Popular Samples</button></a
+          >
+          <a href="genres_index.html"><button>Genres</button></a>
+          <a href="playlists_index.html"><button>Playlists</button></a>
+        </ul>
+      </nav>
+      <button type="button" onclick="showForm()">Create Account</button>
+    </header>
+    <main>
+      <h1>Music History Through Sampling</h1>
+      <h2>learn your favorite songs roots.</h2>
+      <div id="example-images-set">
+        <img class="example-image-one" src="ironside.jpg" alt="ironside logo" />
+        <img class="arrow" src="arrow.jpg" alt="arrow-jpg" />
+        <img class="mf-doom-all-caps" src="doom.jpg" alt="doom-image" />
+      </div>
+      <div class="video">
+        <iframe id="mp4" width="100%" height="315" src="all_caps.mp4"></iframe>
+      </div>
+
+      <!-- Add the HTML form and display elements -->
+      <form id="userForm" class="popup-form">
+        <label for="userName">Enter your name:</label>
+        <input type="text" id="userName" autocomplete="name" />
+        <button type="button" onclick="processForm()">Submit</button>
+      </form>
+
+      <div id="userOutput" style="display: flex">
+        <h3>User Input:</h3>
+        <p id="userNameOutput"></p>
+      </div>
+    </main>
+    <footer>
+      <h3>This webpage is brought to you by: Ryan Fields</h3>
+    </footer>
+
+    <script>
+      console.log("Page Loaded");
+
+      const userForm = document.querySelector("#userForm");
+      const userNameInput = document.querySelector("#userName");
+      const userOutput = document.querySelector("#userOutput");
+
+      userForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const userName = userNameInput.value;
+        userOutput.innerHTML = `<h3>User Input:</h3><p>${userName}</p>`;
+        userOutput.style.display = "block";
+        userForm.style.display = "none";
+      });
+
+      function showForm() {
+        userForm.style.display = "flex";
+        userOutput.style.display = "none";
+        userForm.style.position = "fixed";
+      }
+
+      function processForm() {
+        const userName = userNameInput.value;
+        userOutput.innerHTML = `<h3>User Input:</h3><p>${userName}</p>`;
+        userOutput.style.display = "block";
+        userForm.style.display = "none";
+      }
+
+      function searchSong() {}
+    </script>
+  </body>
+</html>
