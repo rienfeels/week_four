@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
   </head>
   <body>
     <header>
@@ -25,7 +29,7 @@
             ><button>Popular Samples</button></a
           >
           <a href="genres_index.html"><button>Genres</button></a>
-          <a href="playlists_index.html"><button>Playlists</button></a>
+          <a href="playlists_index.html"><button>Artists ID Lookup</button></a>
         </ul>
       </nav>
       <button type="button" onclick="showForm()">Create Account</button>
@@ -33,9 +37,15 @@
     <main>
       <h1>Music History Through Sampling</h1>
       <h2>learn your favorite songs roots.</h2>
+      <div id="resultContainer"></div>
+
       <div id="example-images-set">
         <img class="example-image-one" src="ironside.jpg" alt="ironside logo" />
-        <img class="arrow" src="arrow.jpg" alt="arrow-jpg" />
+        <img
+          class="animate__animated animate__lightSpeedInLeft"
+          src="arrow.jpg"
+          alt="arrow-jpg"
+        />
         <img class="mf-doom-all-caps" src="doom.jpg" alt="doom-image" />
       </div>
       <div class="video">
@@ -343,7 +353,40 @@
         userForm.style.display = "none";
       }
 
-      function searchSong() {}
+      function searchSong() {
+        const songInput = document.getElementById("songSearch").value;
+
+        // Replace YOUR_DISCOGS_API_KEY with your actual Discogs API key
+        const apiKey = "bmowHxKDkguJzXoMyPoU";
+
+        // Example Discogs API endpoint for searching releases by artist name
+        const apiUrl = `https://api.discogs.com/database/search?q=${songInput}&key=${apiKey}&secret=NiRGOLydFLANQtnwZgmkaYqaWMbOkQPm`;
+
+        fetch(apiUrl, {
+          method: "GET",
+          headers: {
+            "User-Agent": "YourApp/1.0",
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.results && data.results.length > 0) {
+              const artistName = data.results[0].title; // Modify this based on the API response
+              displayResult(`Artist: ${artistName}`);
+            } else {
+              displayResult("No results found");
+            }
+          })
+          .catch((error) => {
+            console.error(error.message);
+            displayResult("Error fetching data");
+          });
+      }
+
+      function displayResult(result) {
+        const resultContainer = document.getElementById("resultContainer");
+        resultContainer.textContent = result;
+      }
     </script>
   </body>
 </html>

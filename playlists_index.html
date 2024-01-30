@@ -25,7 +25,7 @@
             ><button>Popular Samples</button></a
           >
           <a href="genres_index.html"><button>Genres</button></a>
-          <a href="playlists_index.html"><button>Playlists</button></a>
+          <a href="playlists_index.html"><button>Artist ID Lookup</button></a>
         </ul>
       </nav>
       <button type="button" onclick="showForm()">Create Account</button>
@@ -52,6 +52,7 @@
         <h3>Artist Votes:</h3>
         <ul id="artistList"></ul>
       </div>
+      <div id="root"></div>
     </main>
     <footer>
       <div class="main">
@@ -410,5 +411,7 @@
         displayFavoriteArtists(favoriteArtistsInput.value);
       }
     </script>
+
+    <script src="index.js"></script>
   </body>
 </html>
