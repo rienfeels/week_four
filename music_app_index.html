@@ -356,7 +356,6 @@
       function searchSong() {
         const songInput = document.getElementById("songSearch").value;
 
-        // Replace YOUR_DISCOGS_API_KEY with your actual Discogs API key
         const apiKey = "bmowHxKDkguJzXoMyPoU";
 
         // Example Discogs API endpoint for searching releases by artist name
@@ -371,7 +370,7 @@
           .then((response) => response.json())
           .then((data) => {
             if (data.results && data.results.length > 0) {
-              const artistName = data.results[0].title; // Modify this based on the API response
+              const artistName = data.results[0].title;
               displayResult(`Artist: ${artistName}`);
             } else {
               displayResult("No results found");

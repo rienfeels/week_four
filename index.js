@@ -13,7 +13,6 @@ document.addEventListener("DOMContentLoaded", function () {
     return;
   }
 
-  // Replace YOUR_DISCOGS_API_KEY with your actual Discogs API key
   const apiKey = "bmowHxKDkguJzXoMyPoU";
 
   // Example Discogs API endpoint for fetching artist information
