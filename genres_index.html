@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Genres</title>
     <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"></script>
   </head>
   <body>
     <header>
@@ -31,28 +32,17 @@
       <button type="button" onclick="showForm()">Create Account</button>
     </header>
     <main>
-      <h1>Choose your preferred genre.</h1>
-      <ul>
-        <li><button>Hip-Hop</button></li>
-        <li><button>Jazz</button></li>
-        <li><button>Pop</button></li>
-        <li><button>Electronic</button></li>
-      </ul>
-      <form id="userForm" class="popup-form">
-        <label for="userName">Enter your name:</label>
-        <input type="text" id="userName" autocomplete="name" />
-        <label for="favoriteArtists"
-          >Enter your favorite artists (comma-searated):</label
-        >
-        <textarea id="favoriteArtists" rows="4"></textarea>
-        <button type="button" onclick="processForm()">Submit</button>
-      </form>
-
-      <div id="userOutput" style="display: none">
-        <h3>User Input:</h3>
-        <p id="userNameOutput"></p>
-        <p id="favoriteArtistsOutput"></p>
+      <div id="genreInfoContainer">
+        <!-- This is where genre information will be displayed -->
       </div>
+
+      <ul id="genreList">
+        <!-- List of genres for the user to click on -->
+        <li onclick="fetchGenreInfo('rock')"><button>Rock</button></li>
+        <li onclick="fetchGenreInfo('hiphop')"><button>hiphop</button></li>
+        <li onclick="fetchGenreInfo('jazz')"><button>Jazz</button></li>
+        <!-- Add more genres as needed -->
+      </ul>
     </main>
     <footer>
       <div class="main">
@@ -313,48 +303,79 @@
       </div>
     </footer>
     <script>
-      console.log("Page Loaded");
+      let fetchGenreInfo; // Declare fetchGenreInfo in the global scope
 
-      const userForm = document.querySelector("#userForm");
-      const userNameInput = document.querySelector("#userName");
-      const favoriteArtistsInput = document.querySelector("#favoriteArtists");
-      const userOutput = document.querySelector("#userOutput");
-      const userNameOutput = document.querySelector("#userNameOutput");
-      const favoriteArtistsOutput = document.querySelector(
-        "#favoriteArtistsOutput"
-      );
+      document.addEventListener("DOMContentLoaded", function () {
+        console.log("Page Loaded");
 
-      userForm.addEventListener("submit", function (event) {
-        event.preventDefault();
+        const genreList = document.getElementById("genreList");
+        const genreInfoContainer =
+          document.getElementById("genreInfoContainer");
 
-        const userName = userNameInput.value;
-        const favoriteArtists = favoriteArtistsInput.value;
+        if (genreList) {
+          genreList.addEventListener("click", function (event) {
+            if (event.target.tagName === "BUTTON") {
+              const genre = event.target.textContent.toLowerCase();
+              fetchGenreInfo(genre);
+            }
+          });
+        }
 
-        userNameOutput.textContent = `Name: ${userName}`;
-        favoriteArtistsOutput.textContent = `Favorite Artists: ${favoriteArtists}`;
+        function fetchGenreInfo(genre) {
+          const apiKey = "bmowHxKDkguJzXoMyPoU";
+          const apiSecret = "NiRGOLydFLANQtnwZgmkaYqaWMbOkQPm";
+          const baseURL = "https://api.discogs.com";
+          const url = `${baseURL}/database/search?type=release&q=${genre}&key=${apiKey}&secret=${apiSecret}`;
 
-        userOutput.style.display = "block";
-        userForm.style.display = "none";
+          fetch(url, {
+            method: "GET",
+            headers: {
+              "User-Agent": "YourApp/1.0",
+            },
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              displayGenreInfo(data, genre);
+            })
+            .catch((error) => {
+              console.error("Error fetching genre information:", error);
+              displayGenreInfo(null, genre);
+            });
+        }
+
+        const genreDescriptions = {
+          rock: `
+        <p>Rock music or rock and roll in full name is a genre of popular music that originated as "rock and roll" in the United States in the early 1950s, and developed into a range of different styles in the late 1950s, 1960s and later, particularly in the United Kingdom and the United States. Its roots are in 1950s' American rock and roll when and where it first started, itself heavily influenced by rhythm and blues and country music. Rock music also drew strongly on a number of other genres such as blues and folk, and incorporated influences from jazz, classical and other musical sources.</p>
+        <p>In its purest form, Rock & Roll has three chords, a strong, insistent back beat, and a catchy melody. Early rock & roll drew from a variety of sources, primarily blues, R&B, and country, but also gospel, traditional pop, jazz, and folk. All of these influences combined in a simple, blues-based song structure that was fast, danceable, and catchy. The first wave of rock & rollers -- Chuck Berry, Elvis Presley, Little Richard, Jerry Lee Lewis, Buddy Holly, Bo Diddley, Bill Haley, Gene Vincent, the Everly Brothers, and Carl Perkins, among many others -- set the template for rock & roll that was followed over the next four decades.</p>
+        <p>Provided by Wikipedia under Creative Commons Attribution CC-BY-SA 4.0</p>
+      `,
+          jazz: `
+    <p>Jazz is a genre of music that originated in African-American communities during the late 19th and early 20th century. Jazz emerged in many parts of the United States of independent popular musical styles; linked by the common bonds of European American and African-American musical parentage with a performance orientation.</p>
+    <p>Jazz spans a range of music from ragtime to the present day—a period of over 100 years—and has proved to be very difficult to define. Jazz makes heavy use of improvisation, polyrhythms, syncopation, and the swung note, as well as aspects of European harmony, American popular music, the brass band tradition, and African musical elements such as blue notes and ragtime. A musical group that plays jazz is called a jazz band.</p>
+    <p>While New Orleans jazz has improvised ensembles, when jazz started becoming popular in the 1920s and demand was growing for larger dance bands, it became necessary for ensembles to be written down, particularly when a group included more than three...</p>
+    <p>Provided by Wikipedia under Creative Commons Attribution CC-BY- SA 4.0</p>
+  `,
+          hiphop: `
+    <p>Hip hop music, also called hip-hop, rap music, or hip-hop music, is a music genre consisting of a stylized rhythmic music that commonly accompanies rapping, a rhythmic and rhyming speech that is chanted. It developed as part of hip hop culture, a subculture defined by four key stylistic elements: MCing/rapping, DJing/scratching, break dancing, and graffiti writing.</p>
+    <p>Other elements include sampling (or synthesis), and beatboxing. While often used to refer to rapping, "hip hop" more properly denotes the practice of the entire subculture. The term hip hop music is sometimes used synonymously with the term rap music, though rapping is not a required component of hip hop music; the genre may also incorporate other elements of hip hop culture, including DJing and scratching, beatboxing, and instrumental tracks.</p>
+    <p>Rap's germination is sometimes attributed to the righteous street poetry of the Last Poets and the Watts Prophets, but it didn't begin to take full shape -- and earn its tag -- until after the Sugarhill Gang released "Rapper's Delight" in 1979.</p>
+    <p>Provided by Wikipedia under Creative Commons Attribution CC-BY-SA 4.0</p>
+  `,
+          // Add more genres and their descriptions as needed
+        };
+
+        function displayGenreInfo(data, genre) {
+          const genreInfoContainer =
+            document.getElementById("genreInfoContainer");
+
+          if (genreDescriptions[genre]) {
+            genreInfoContainer.innerHTML = genreDescriptions[genre];
+          } else {
+            genreInfoContainer.innerHTML =
+              "<p>No information available for this genre.</p>";
+          }
+        }
       });
-
-      function showForm() {
-        userForm.style.display = "flex";
-        userOutput.style.display = "none";
-        userForm.style.position = "fixed";
-      }
-
-      function processForm() {
-        const userName = userNameInput.value;
-        const favoriteArtists = favoriteArtistsInput.value;
-
-        userNameOutput.textContent = `Name: ${userName}`;
-        favoriteArtistsOutput.textContent = `Favorite Artists: ${favoriteArtists}`;
-
-        userOutput.style.display = "block";
-        userForm.style.display = "none";
-      }
-
-      function searchSong() {}
     </script>
   </body>
 </html>

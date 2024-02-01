@@ -370,7 +370,7 @@
           .then((response) => response.json())
           .then((data) => {
             if (data.results && data.results.length > 0) {
-              const artistName = data.results[0].title;
+              const artistName = data.results[0].title; // Modify this based on the API response
               displayResult(`Artist: ${artistName}`);
             } else {
               displayResult("No results found");
