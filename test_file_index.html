@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="iframeContainer"></div>
+  </body>
+  <script>
+    function toggleIFrame() {
+      const iframeContainer = document.getElementById("iframeContainer");
+      let iframe = document.querySelector("#iframe");
+
+      if (!iframe) {
+        iframe = document.createElement("iframe");
+        iframe.src = "all_falls_down.mp4";
+        iframe.width = "600";
+        iframe.height = "400";
+        iframe.frameBorder = "0";
+        iframe.allowFullscreen = true;
+        iframe.className = "iframe";
+
+        iframeContainer.appendChild(iframe);
+      } else {
+        iframeContainer.removeChild(iframe);
+      }
+    }
+    toggleIFrame();
+    function displayResult(result) {
+      const resultContainer = document.getElementById("resultContainer");
+      resultContainer.textContent = result;
+    }
+  </script>
+</html>

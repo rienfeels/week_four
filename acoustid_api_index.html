@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AcoustID API Demo</title>
+  </head>
+  <body>
+    <h1>AcoustID API Demo</h1>
+    <form id="uploadForm" enctype="multipart/form-data">
+      <input type="file" name="audioFile" accept=".mp3" required />
+      <button type="submit">Submit</button>
+    </form>
+    <div id="result"></div>
+
+    <script>
+      document
+        .getElementById("uploadForm")
+        .addEventListener("submit", async function (event) {
+          event.preventDefault();
+
+          const formData = new FormData(this);
+
+          try {
+            const response = await fetch("/http://localhost:3000/identify", {
+              method: "POST",
+              body: formData,
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+              document.getElementById("result").innerText = result.message;
+            } else {
+              document.getElementById(
+                "result"
+              ).innerText = `Error: ${result.error}`;
+            }
+          } catch (error) {
+            console.error("Error:", error);
+          }
+        });
+    </script>
+    <script src="acoustid-api-index.js"></script>
+  </body>
+</html>

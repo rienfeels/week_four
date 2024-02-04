@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <a href="music_app_index.html">
+        <img
+          class="transparent-image"
+          src="logo_4.jpg"
+          alt="the sampler logo"
+        />
+      </a>
+      <div class="search container">
+        <input type="text" id="songSearch" placeholder="Search for a song..." />
+        <button id="searchButton" onclick="searchSong()"></button>
+      </div>
+      <nav>
+        <ul>
+          <a href="popular-samples_index.html"
+            ><button>Popular Samples</button></a
+          >
+          <a href="genres_index.html"><button>Genres</button></a>
+          <a href="playlists_index.html"><button>Artists ID Lookup</button></a>
+        </ul>
+      </nav>
+      <button type="button" onclick="showForm()">Create Account</button>
+    </header>
+    <main>
+      <div></div>
+    </main>
+    <script>
+      console.log("Page Loaded");
+
+      const userForm = document.querySelector("#userForm");
+      const userNameInput = document.querySelector("#userName");
+      const userOutput = document.querySelector("#userOutput");
+      console.log(userForm);
+      userForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const userName = userNameInput.value;
+        userOutput.innerHTML = `<h3>User Input:</h3><p>${userName}</p>`;
+        userOutput.style.display = "block";
+        userForm.style.display = "none";
+      });
+
+      function showForm() {
+        userForm.style.display = "flex";
+        userOutput.style.display = "none";
+        userForm.style.position = "fixed";
+      }
+
+      function processForm() {
+        const userName = userNameInput.value;
+        userOutput.innerHTML = `<h3>User Input:</h3><p>${userName}</p>`;
+        userOutput.style.display = "block";
+        userForm.style.display = "none";
+      }
+
+      function searchSamples() {
+        const songInput = document.getElementById("searchSamples").value;
+
+        const apiKey = "bmowHxKDkguJzXoMyPoU";
+
+        // Example Discogs API endpoint for searching releases by artist name
+        const apiUrl = `https://api.discogs.com/database/search?q=${songInput}&key=${apiKey}&secret=NiRGOLydFLANQtnwZgmkaYqaWMbOkQPm`;
+
+        fetch(url, {
+          method: "GET",
+          headers: {
+            "User-Agent": "YourApp/1.0",
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            displayGenreInfo(data, genre);
+          })
+          .catch((error) => {
+            console.error("Error fetching genre information:", error);
+            displayGenreInfo(null, genre);
+          });
+      }
+
+      const sampledSongs = {
+        PoeticJustice: ` 
+        `,
+      };
+      function toggleIFrame() {
+        const iframeContainer = document.getElementById("iframeContainer");
+        let iframe = iframeContainer.querySelector("iframe");
+
+        if (!iframe) {
+          iframe = document.createElement("iframe");
+          iframe.src = "all_falls_down.mp4";
+          iframe.width = "600";
+          iframe.height = "400";
+          iframe.frameBorder = "0";
+          iframe.allowFullscreen = true;
+
+          iframeContainer.appendChild(iframe);
+        } else {
+          iframeContainer.removeChild(iframe);
+        }
+      }
+
+      function displayResult(result) {
+        const resultContainer = document.getElementById("resultContainer");
+        resultContainer.textContent = result;
+      }
+    </script>
+  </body>
+</html>

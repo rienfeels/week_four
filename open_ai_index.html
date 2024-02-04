@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <header>
+    <a href="music_app_index.html">
+      <img class="transparent-image" src="logo_4.jpg" alt="The sampler logo" />
+    </a>
+    <nav>
+      <ul>
+        <a href="popular-samples_index.html"
+          ><button>Popular Samples</button></a
+        >
+        <a href="genres_index.html"><button>Genres</button></a>
+        <a href="playlists_index.html"><button>Artists ID Lookup</button></a>
+        <a href="open_ai_index.html"><button>Find Samples</button></a>
+      </ul>
+    </nav>
+  </header>
+  <body>
+    <h1>Music Sample Finder</h1>
+    <label for="songInput"> Enter a song name:</label>
+    <input type="text" id="songInput" placeholder="e.g., 'Gold Digger'" />
+    <button onclick="findSampledMusic()">Find Sampled Music</button>
+    <p id="result"></p>
+
+    <script src="open_ai_index.js"></script>
+  </body>
+</html>
