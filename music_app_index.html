@@ -19,6 +19,7 @@
           alt="The sampler logo"
         />
       </a>
+
       <div class="search container">
         <input type="text" id="songSearch" placeholder="Search for a song..." />
         <button id="searchButton" onclick="searchSong()">Search</button>
@@ -28,16 +29,26 @@
           <a href="popular-samples_index.html"
             ><button>Popular Samples</button></a
           >
-          <a href="genres_index.html"><button>Genres</button></a>
-          <a href="playlists_index.html"><button>Artists ID Lookup</button></a>
-          <a href="open_ai_index.html"><button>Find samples</button></a>
+          <a href="genres_index.html"><button class="button">Genres</button></a>
+          <a href="playlists_index.html"
+            ><button class="button">Artists ID Lookup</button></a
+          >
+          <a href="open_ai_index.html"
+            ><button class="button">Find samples</button></a
+          >
           <a href="create_account_index.html"
-            ><button>Create An Account</button></a
+            ><button class="button">Create An Account</button></a
           >
         </ul>
       </nav>
     </header>
-    <main>
+    <main style="display: flex; flex-direction: column">
+      <button class="button2" data-text="Awesome">
+        <span class="actual-text2">&nbsp;The Sampler&nbsp;</span>
+        <span aria-hidden="true" class="hover-text2"
+          >&nbsp;The Sampler&nbsp;</span
+        >
+      </button>
       <h1>Music History Through Sampling</h1>
       <h2>learn your favorite songs roots.</h2>
       <div id="resultContainer"></div>
