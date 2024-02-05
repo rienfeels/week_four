@@ -1,4 +1,3 @@
-// JS: open_ai_index.js
 async function findSampledMusic() {
   const userInput = document.getElementById("songInput").value;
   const chatMemory = await getChatGPTResponse(userInput);
@@ -17,8 +16,7 @@ async function getChatGPTResponse(userInput, chatMemory = []) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization:
-          "Bearer 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",
+        Authorization: "Bearer ",
       },
       body: JSON.stringify({
         model: "gpt-3.5-turbo",

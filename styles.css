@@ -39,8 +39,7 @@ h2 {
   display: flex;
   justify-content: center;
   color: white;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
+  font-family: fantasy;
 }
 
 .search-container {
@@ -73,6 +72,12 @@ body {
   flex-direction: column;
 }
 
+#result {
+  color: antiquewhite;
+  font-size: larger;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
 footer {
   margin-top: auto;
   text-align: center;
@@ -80,6 +85,7 @@ footer {
   padding: 10px;
   color: white;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  background: radial-gradient(#607d8b, transparent);
 }
 
 #songSearch::placeholder {
@@ -718,8 +724,10 @@ button:hover::after {
   }
 }
 
-iframe {
+iframe,
+video {
   display: block;
   margin: 0 auto;
   max-width: 100%; /* Make sure the iframe is responsive */
+  height: 250px;
 }
