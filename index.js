@@ -1,6 +1,6 @@
 "use strict";
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", async () => {
   console.log("CONTENT LOADED");
   const root = document.querySelector("#root");
 
@@ -32,23 +32,21 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       return response.json();
     })
-    .then(function (artistData) {
+    .then(async function (artistData) {
       const artistName = artistData.name;
 
       // Example Discogs API endpoint for fetching top releases by artist
       const releasesUrl = `https://api.discogs.com/artists/${artistId}/releases?key=${apiKey}&secret=YOUR_DISCOGS_API_SECRET`;
 
-      return fetch(releasesUrl, {
+      const response = await fetch(releasesUrl, {
         method: "GET",
         headers: {
           "User-Agent": "YourApp/1.0",
         },
-      })
-        .then((response) => response.json())
-        .then((releasesData) => {
-          showArtist(artistName, artistData.uri, releasesData.releases);
-          console.log(artistData);
-        });
+      });
+      const releasesData = await response.json();
+      showArtist(artistName, artistData.uri, releasesData.releases);
+      console.log(artistData);
     })
     .catch(function (error) {
       console.error(error.message);

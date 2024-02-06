@@ -356,20 +356,20 @@
         userForm.style.display = "none";
       });
 
-      function showForm() {
+      const showForm = () => {
         userForm.style.display = "flex";
         userOutput.style.display = "none";
         userForm.style.position = "fixed";
-      }
+      };
 
-      function processForm() {
+      const processForm = () => {
         const userName = userNameInput.value;
         userOutput.innerHTML = `<h3>User Input:</h3><p>${userName}</p>`;
         userOutput.style.display = "block";
         userForm.style.display = "none";
-      }
+      };
 
-      function searchSong() {
+      const searchSong = () => {
         const songInput = document.getElementById("songSearch").value;
 
         const apiKey = "bmowHxKDkguJzXoMyPoU";
@@ -396,7 +396,7 @@
             console.error(error.message);
             displayResult("Error fetching data");
           });
-      }
+      };
 
       function displayResult(result) {
         const resultContainer = document.getElementById("resultContainer");

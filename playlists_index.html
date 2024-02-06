@@ -32,7 +32,7 @@
       <!-- <button type="button" onclick="showForm()">Create Account</button> -->
     </header>
     <main>
-      <!-- <form id="userForm" class="popup-form">
+      <form id="userForm" class="popup-form">
         <label for="userName">Enter your name:</label>
         <input type="text" id="userName" autocomplete="name" />
 
@@ -49,10 +49,11 @@
         <p id="userNameOutput"></p>
         <p id="favoriteArtistsOutput"></p>
       </div>
-      <div id="artistVotes">
+      <!-- <div id="artistVotes">
         <h3>Artist Votes:</h3>
         <ul id="artistList"></ul>
       </div> -->
+
       <div id="root"></div>
     </main>
     <footer>
@@ -316,7 +317,7 @@
     </footer>
     <script>
       console.log("Page Loaded");
-
+      document.addEventListener("DOMContentLoaded", function () {});
       const userForm = document.querySelector("#userForm");
       const userNameInput = document.querySelector("#userName");
       const favoriteArtistsInput = document.querySelector("#favoriteArtists");
